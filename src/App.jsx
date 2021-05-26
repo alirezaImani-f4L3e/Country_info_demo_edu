@@ -4,6 +4,7 @@ import Map from './components/Map'
 import Summary from './components/Summary'
 import wiki from 'wikijs';
 import ReactLoading from 'react-loading'
+import './style.css'
 
 
 export default function App() {
@@ -14,10 +15,12 @@ const [summary ,setSummary]=useState('');
 const [status ,setStatus]=useState(true);
 const [info ,setInfo]=useState('');
 const [flag ,setFlag]=useState('');
+const [lang ,setLang]=useState(false);
+const [api ,setApi]=useState("https://en.wikipedia.org/w/api.php")
 
 useEffect(()=>{
 async function fetchData(){
-        const page= await wiki().page(selectedCountry)
+        const page= await wiki({apiUrl:api}).page(selectedCountry)
 
     const [summary ,info ,images] =await Promise.all([
         page.summary(),
@@ -59,9 +62,23 @@ fetchData();
         setStatus(true)
         setSelectedCountry(name)
     }
+
+    function langHandle() {
+        setStatus(true)
+        
+        if(!lang){
+            
+            setApi("https://fa.wikipedia.org/w/api.php")
+        }else{
+            setApi("https://en.wikipedia.org/w/api.php")
+        }
+        setLang(!lang);
+    }
     return (
         <div className="container mt-3">
+            <button title="just works for iran" className=" btn btn-primary mb-10 newBtn" onClick={langHandle}>change language to {lang? 'english':'persian'}</button>
             <div className="row">
+                
                 <div className="col col-md-9">
                     <Map handleSelectCountry={handleSelectCountry} />
                 </div>
