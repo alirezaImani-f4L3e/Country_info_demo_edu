@@ -12,6 +12,7 @@
         "react-image-mapper": "0.0.15",
         "react-loading": "^2.0.3",
         "react-scripts": "3.4.1",
+        "react-toastify": "^8.1.0",
         "wikijs": "^6.2.1"
     },
     "scripts": {

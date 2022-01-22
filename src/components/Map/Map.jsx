@@ -10,6 +10,7 @@ export default function Map({ handleSelectCountry }) {
             src={world}
             map={map}
             width={800}
-            imgWidth={1000} />
+            imgWidth={1000} 
+            />
     )
 }
